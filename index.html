@@ -21,75 +21,93 @@
       rel="stylesheet"
     />
 
-    <title>Devchallenges</title>
+    <title>Devchallenges Image Uploader</title>
 
     <style>
       body {
         font-family: "Poppins", sans-serif;
       }
+      button{
+        padding: 10px 20px;
+        background-color: #2F80ED;
+        border-radius: 50px;
+        border:none;
+        color:#fafafb;
+      }
+      .card,.box{
+         border-radius: 5%;
+         padding:30px 10px;
+         display: inline-block;
 
-      ul {
-        padding-left: 24px;
+       }
+      .card{
+        background-color: #fafafb;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      }
+      .box{
+        background-color: #F6F8FB;
+        border-style:dashed;
+        border-color: #97BEF4;
+      }
+      .upload-card{
+        text-align: center;
+        margin:0 auto;
+        width:500px;
+        display: block;
+      }
+      .upload-box{
+        width:300px;
       }
 
-      li {
-        margin-bottom: 8px;
-      }
-
-      .welcome {
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .welcome-text {
-        margin-top: 30vh;
-        font-weight: 500;
-      }
-
-      .welcome-text p {
-        font-size: 1rem;
-        font-weight: 400;
-      }
-
-      .welcome-text h1 {
-        font-size: 1.5rem;
-      }
-
-      .welcome-text a {
-        color: #f7542e;
-      }
     </style>
-  </head>
-  <body>
-    <div class="welcome">
-      <div class="welcome-text">
-        <h1>
-          Welcome to
-          <a href="https://devchallenges.io/" target="_blank"
-            >devchallenges.io</a
-          >
-        </h1>
+    <script type="text/javascript">
+      console.log("test")
+      function handleFileSelect(evt){
+        evt.stopPropagation();
+        evt.preventDefault();
 
-        <p>
-          If you have any questions, don't hesitate to ask on Discord. Here are
-          7 general steps to complete the challenge:
-        </p>
+        let files =evt.dataTransfer.files;
+        // ここから下がアップロード用の仮のコード
+
+        for (let i=0;i<files.length;i++){
+          document.getElementById('output').innerHTML +=files[i].name
+        }
+        // アップロード用コード終わり
+      }
+      function handleDragOver(evt){
+        evt.stopPropagation();
+        evt.preventDefault();
+        evt.dataTransfer.dropEffect='copy'
+      }
+      function PageLoad(){
+        let dropFrame = document.getElementById('upload-box');
+        dropFrame.addEventListener('dragover',handleDragOver,false);
+        dropFrame.addEventListener('drop',handleFileSelect,false);
+      }
+    </script>
+  </head>
+  <body onload="PageLoad();">>
+  <header>
+    <h1>
+      Image uploader
+    </h1>
+  </header>
+    <div class="welcome">
+
+      <div class="upload-card card">
+        <h2>Upload your image</h2>
+        <p>File should be Jpeg,Png...</p>
+        <div class="upload-box box" id="upload-box">
+          <img src="image.svg" alt="sample photo">
+          <p>Drag&Drop your image here</p>
+        </div>
+        <p>Or</p>
+        <button>Choose a file</button>
+      </div>
+      <div id="output">
       </div>
 
-      <ul>
-        <li><b>Step 1:</b> Create a new repository on github</li>
-        <li><b>Step 2:</b> Copy resources, README.md to your repository</li>
-        <li>
-          <b>Step 3:</b> Login to Figma to checkout font, color, spacing,..
-        </li>
-        <li><b>Step 4:</b> Complete all user stories</li>
-        <li><b>Step 5:</b> Update README.md</li>
-        <li><b>Step 6:</b> Deploy your app and submit your solution</li>
-        <li>
-          <b>Step 7:</b> Share your solution on Discord, Twitter and other
-          platforms to ask for feedback
-        </li>
-      </ul>
     </div>
   </body>
+
 </html>
